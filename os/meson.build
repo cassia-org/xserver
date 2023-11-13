@@ -87,7 +87,7 @@ if srcs_libc.length() > 0
     )
 endif
 
-if enable_input_thread
+if enable_input_thread and host_machine.system() != 'android'
     os_dep += cc.find_library('pthread')
 endif
 
