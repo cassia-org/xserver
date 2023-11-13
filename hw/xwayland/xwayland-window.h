@@ -38,7 +38,9 @@
 #include <propertyst.h>
 #include <validate.h>
 #include <wayland-util.h>
+#ifndef __ANDROID__
 #include <xf86drm.h>
+#endif
 
 #include "xwayland-types.h"
 
@@ -55,7 +57,9 @@ struct xwl_format_table_entry {
 };
 
 struct xwl_device_formats {
+#ifndef __ANDROID__
     drmDevice *drm_dev;
+#endif
     int supports_scanout;
     uint32_t num_formats;
     struct xwl_format *formats;
@@ -75,7 +79,9 @@ struct xwl_format_table {
 struct xwl_dmabuf_feedback {
     struct zwp_linux_dmabuf_feedback_v1 *dmabuf_feedback;
     struct xwl_format_table format_table;
+#ifndef __ANDROID__
     drmDevice *main_dev;
+#endif
     /*
      * This will be filled in during wl events and copied to
      * dev_formats on dmabuf_feedback.tranche_done

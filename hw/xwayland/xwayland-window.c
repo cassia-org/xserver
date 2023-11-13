@@ -1076,7 +1076,9 @@ xwl_device_formats_destroy(struct xwl_device_formats *dev_formats)
     for (int j = 0; j < dev_formats->num_formats; j++)
         free(dev_formats->formats[j].modifiers);
     free(dev_formats->formats);
+#ifndef __ANDROID__
     drmFreeDevice(&dev_formats->drm_dev);
+#endif
 }
 
 void

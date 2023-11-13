@@ -31,7 +31,9 @@
 #include <sys/types.h>
 
 #include <wayland-client.h>
+#ifndef __ANDROID__
 #include <xf86drm.h>
+#endif
 
 #include "xwayland-types.h"
 
@@ -100,10 +102,12 @@ struct xwl_egl_backend {
      */
     Bool (*check_flip)(PixmapPtr pixmap);
 
+#ifndef __ANDROID__
     /* Called to get the DRM device of the primary GPU that this backend
      * is set up on.
      */
     drmDevice *(*get_main_device)(struct xwl_screen *xwl_screen);
+#endif
 
     /* Direct hook to create the backing pixmap for a window */
     PixmapPtr (*create_pixmap_for_window)(struct xwl_window *xwl_window);
